@@ -1,0 +1,36 @@
+<ion-content class="ion-padding">
+  <h1>Crear Evento</h1>
+  <form (ngSubmit)="createEvent()">
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="event.title" name="title" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea
+        [(ngModel)]="event.description"
+        name="description"
+        required
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-datetime
+        [(ngModel)]="event.date"
+        name="date"
+        display-format="DD/MM/YYYY"
+        picker-format="DD MMM YYYY"
+        required
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ubicación</ion-label>
+      <ion-input
+        [(ngModel)]="event.location"
+        name="location"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit">Crear Evento</ion-button>
+  </form>
+</ion-content>
