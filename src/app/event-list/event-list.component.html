@@ -1,15 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Eventos</ion-title>
+    <ion-title>
+      <ion-icon name="calendar"></ion-icon>
+      Eventos
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="goToProfile()">
-        <ion-icon name="person"></ion-icon>
+        <ion-icon name="person-circle"></ion-icon>
       </ion-button>
       <ion-button (click)="goToSettings()">
         <ion-icon name="settings"></ion-icon>
       </ion-button>
       <ion-button (click)="goToCompletedEvents()">
-        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-icon name="checkmark-done-circle"></ion-icon>
       </ion-button>
       <ion-button (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
@@ -24,9 +27,13 @@
       *ngFor="let event of events$ | async"
       (click)="goToEventDetails(event.id)"
     >
+      <ion-icon name="calendar" slot="start"></ion-icon>
       <ion-label>
         <h2>{{ event.title }}</h2>
-        <p>{{ event.date | date }}</p>
+        <p>
+          <ion-icon name="time"></ion-icon>
+          {{ event.date | date }}
+        </p>
       </ion-label>
     </ion-item>
   </ion-list>

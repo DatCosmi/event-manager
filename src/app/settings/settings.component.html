@@ -13,11 +13,16 @@
     <ion-label>Color primario</ion-label>
     <ion-input type="color" [(ngModel)]="primaryColor"></ion-input>
   </ion-item>
+  <h2>Modo oscuro</h2>
   <ion-item>
-    <ion-label>Color secundario</ion-label>
-    <ion-input type="color" [(ngModel)]="secondaryColor"></ion-input>
+    <ion-label>Activar modo oscuro</ion-label>
+    <ion-toggle
+      [(ngModel)]="darkMode"
+      (ionChange)="toggleDarkMode()"
+    ></ion-toggle>
   </ion-item>
-  <ion-button expand="block" (click)="updateColors()"
-    >Aplicar colores</ion-button
-  >
+  <ion-button expand="block" (click)="updateColors()">
+    <ion-icon name="color-palette" slot="start"></ion-icon>
+    Aplicar colores
+  </ion-button>
 </ion-content>

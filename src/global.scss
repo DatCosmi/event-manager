@@ -36,23 +36,36 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+/* Estilos globales */
 :root {
+  --ion-color-primary: #3880ff;
+  --ion-color-secondary: #3dc2ff;
   --ion-color-primary-contrast: #ffffff;
+  --ion-color-light: #ffffff;
 }
 
-/* Estilos globales */
+/* Modo oscuro */
+.dark {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+  --ion-border-color: #222222;
+  --ion-item-background: #1e1e1e;
+  --ion-toolbar-background: #1f1f1f;
+  --ion-tab-bar-background: #1f1f1f;
+  --ion-card-background: #1e1e1e;
+}
+
+/* Otros estilos globales */
 ion-content {
-  --background: #f4f5f8;
+  --background: var(--ion-background-color);
 }
 
 ion-item {
-  --background: #ffffff;
+  --background: var(--ion-item-background);
   --border-radius: 10px;
   margin-bottom: 10px;
-}
-
-ion-input.custom-input {
-  --color: #333;
 }
 
 ion-button {
@@ -61,17 +74,14 @@ ion-button {
 }
 
 h1 {
-  font-size: 30px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  color: var(--ion-text-color);
+}
+
+h2 {
+  color: var(--ion-color-primary);
 }
 
 a {
-  color: --ion-color-primary;
+  color: var(--ion-color-primary);
   text-decoration: none;
-}
-
-p {
-  color: #505050;
 }

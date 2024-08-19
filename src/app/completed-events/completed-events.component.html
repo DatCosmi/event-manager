@@ -3,16 +3,20 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/events"></ion-back-button>
     </ion-buttons>
-    <ion-title>Eventos Completados</ion-title>
+    <ion-title
+      ><ion-icon name="checkmark-done-circle"></ion-icon> Eventos
+      Completados</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let event of completedEvents$ | async">
+      <ion-icon name="checkmark-circle" slot="start"></ion-icon>
       <ion-label>
         <h2>{{ event.title }}</h2>
-        <p>{{ event.date | date }}</p>
+        <p><ion-icon name="calendar"></ion-icon> {{ event.date | date }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
