@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-completed-events',
@@ -12,11 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class CompletedEventsComponent implements OnInit {
   completedEvents$: Observable<any[]>;
 
-  constructor(
-    private eventService: EventService,
-    private authService: AuthService,
-    private router: Router
-  ) {
+  constructor(private eventService: EventService, private router: Router) {
     this.completedEvents$ = this.eventService.getCompletedEvents();
   }
 

@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
-  styleUrls: ['./event-details.component.scss']
+  styleUrls: ['./event-details.component.scss'],
 })
 export class EventDetailsComponent implements OnInit {
   event: any = {};
@@ -22,7 +22,7 @@ export class EventDetailsComponent implements OnInit {
   ngOnInit() {
     const eventId = this.route.snapshot.paramMap.get('id');
     if (eventId) {
-      this.eventService.getEvent(eventId).subscribe(event => {
+      this.eventService.getEvent(eventId).subscribe((event) => {
         this.event = { id: eventId, ...event };
       });
     }
@@ -71,7 +71,7 @@ export class EventDetailsComponent implements OnInit {
     const alert = await this.alertController.create({
       header,
       message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }

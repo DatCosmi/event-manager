@@ -14,7 +14,10 @@ export class SettingsComponent implements OnInit {
   constructor(private alertController: AlertController) {}
 
   ngOnInit() {
-    this.darkMode = document.body.classList.contains('dark');
+    // Verificar si el modo oscuro está activado
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkMode = prefersDark.matches;
+    this.updateDarkMode();
   }
 
   updateColors() {
@@ -31,7 +34,16 @@ export class SettingsComponent implements OnInit {
 
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
+    this.updateDarkMode();
+  }
+
+  updateDarkMode() {
     document.body.classList.toggle('dark', this.darkMode);
+    if (this.darkMode) {
+      document.body.setAttribute('color-theme', 'dark');
+    } else {
+      document.body.setAttribute('color-theme', 'light');
+    }
   }
 
   async showAlert(header: string, message: string) {

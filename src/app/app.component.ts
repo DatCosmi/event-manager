@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    this.initializeDarkMode();
+    this.initializeTheme();
   }
 
-  initializeDarkMode() {
+  initializeTheme() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     if (prefersDark.matches) {
       document.body.classList.add('dark');
