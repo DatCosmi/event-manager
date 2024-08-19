@@ -2,21 +2,25 @@
   <h1>Registro</h1>
   <form (ngSubmit)="register()">
     <ion-item>
-      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-label color="primary" position="floating"
+        >Correo electrónico</ion-label
+      >
       <ion-input
         type="email"
         [(ngModel)]="email"
         name="email"
         required
+        class="custom-input"
       ></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
+      <ion-label color="primary" position="floating">Contraseña</ion-label>
       <ion-input
         type="password"
         [(ngModel)]="password"
         name="password"
         required
+        class="custom-input"
       ></ion-input>
     </ion-item>
     <ion-button expand="block" type="submit">Registrarse</ion-button>
