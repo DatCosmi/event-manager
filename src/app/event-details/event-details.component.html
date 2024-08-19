@@ -1,3 +1,51 @@
-<p>
-  event-details works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/events"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del Evento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleEditMode()">
+        <ion-icon [name]="editMode ? 'close' : 'create'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="!editMode">
+    <h1>{{ event?.title }}</h1>
+    <p>{{ event?.description }}</p>
+    <p>Fecha: {{ event?.date | date }}</p>
+    <p>Ubicación: {{ event?.location }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="editMode">
+    <form (ngSubmit)="updateEvent()">
+      <ion-item>
+        <ion-label position="floating">Título</ion-label>
+        <ion-input [(ngModel)]="event.title" name="title" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea [(ngModel)]="event.description" name="description" required></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-datetime [(ngModel)]="event.date" name="date" display-format="DD/MM/YYYY" picker-format="DD MMM YYYY" required></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Ubicación</ion-label>
+        <ion-input [(ngModel)]="event.location" name="location" required></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit">Actualizar Evento</ion-button>
+    </form>
+  </ng-container>
+
+  <ion-button expand="block" color="danger" (click)="deleteEvent()" *ngIf="!editMode">
+    Eliminar Evento
+  </ion-button>
+  <ion-button expand="block" color="success" (click)="markAsCompleted()" *ngIf="!editMode">
+    Marcar como completado
+  </ion-button>
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/events"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Personalizar colores</h2>
+  <ion-item>
+    <ion-label>Color primario</ion-label>
+    <ion-input type="color" [(ngModel)]="primaryColor"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Color secundario</ion-label>
+    <ion-input type="color" [(ngModel)]="secondaryColor"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="updateColors()"
+    >Aplicar colores</ion-button
+  >
+</ion-content>

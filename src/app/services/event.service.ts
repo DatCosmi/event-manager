@@ -11,7 +11,22 @@ export class EventService {
 
   getEvents(): Observable<any[]> {
     return this.afs
-      .collection('events')
+      .collection('events', (ref) => ref.where('completed', '==', false))
+      .snapshotChanges()
+      .pipe(
+        map((actions) =>
+          actions.map((a) => {
+            const data = a.payload.doc.data() as any;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+  }
+
+  getCompletedEvents(): Observable<any[]> {
+    return this.afs
+      .collection('events', (ref) => ref.where('completed', '==', true))
       .snapshotChanges()
       .pipe(
         map((actions) =>
@@ -29,7 +44,7 @@ export class EventService {
   }
 
   createEvent(event: any): Promise<any> {
-    return this.afs.collection('events').add(event);
+    return this.afs.collection('events').add({ ...event, completed: false });
   }
 
   updateEvent(id: string, event: any): Promise<void> {
@@ -38,5 +53,9 @@ export class EventService {
 
   deleteEvent(id: string): Promise<void> {
     return this.afs.doc(`events/${id}`).delete();
+  }
+
+  markAsCompleted(id: string): Promise<void> {
+    return this.afs.doc(`events/${id}`).update({ completed: true });
   }
 }
