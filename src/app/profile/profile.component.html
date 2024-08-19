@@ -8,20 +8,24 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="updateProfile()">
-    <ion-item>
-      <ion-icon name="person" slot="start"></ion-icon>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="displayName" name="displayName"></ion-input>
-    </ion-item>
-    <ion-button expand="block" (click)="takePicture()">
-      <ion-icon name="camera" slot="start"></ion-icon>
-      Tomar foto de perfil
-    </ion-button>
-    <ion-img *ngIf="photoURL" [src]="photoURL"></ion-img>
-    <ion-button expand="block" type="submit">
-      <ion-icon name="save" slot="start"></ion-icon>
-      Actualizar perfil
-    </ion-button>
-  </form>
+  <div class="container">
+    <form (ngSubmit)="updateProfile()">
+      <ion-item>
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="displayName" name="displayName"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="takePicture()">
+        <ion-icon name="camera" slot="start"></ion-icon>
+        Tomar foto de perfil
+      </ion-button>
+      <div class="image-container">
+        <ion-img *ngIf="photoURL" [src]="photoURL"></ion-img>
+      </div>
+      <ion-button expand="block" type="submit">
+        <ion-icon name="save" slot="start"></ion-icon>
+        Actualizar perfil
+      </ion-button>
+    </form>
+  </div>
 </ion-content>

@@ -55,11 +55,25 @@ export class AuthService {
     return userRef.set(userData, { merge: true });
   }
 
-  async updateProfile(displayName: string, photoURL: string): Promise<void> {
+  async updateProfile(displayName?: string, photoURL?: string): Promise<void> {
     const user = await this.afAuth.currentUser;
     if (user) {
-      await user.updateProfile({ displayName, photoURL });
-      await this.setUserData(user);
+      try {
+        const updateData: { displayName?: string; photoURL?: string } = {};
+        if (displayName !== undefined) updateData.displayName = displayName;
+        if (photoURL !== undefined) updateData.photoURL = photoURL;
+
+        await user.updateProfile(updateData);
+        await this.setUserData({
+          ...user,
+          ...updateData,
+        });
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        throw error;
+      }
+    } else {
+      throw new Error('No user is currently signed in');
     }
   }
 }

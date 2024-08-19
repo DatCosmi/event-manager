@@ -1,35 +1,39 @@
 <ion-content class="ion-padding">
-  <h1><ion-icon name="log-in"></ion-icon> Iniciar sesión</h1>
-  <form (ngSubmit)="login()">
-    <ion-item>
-      <ion-icon name="mail" slot="start"></ion-icon>
-      <ion-label position="floating">Correo electrónico</ion-label>
-      <ion-input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        required
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="lock-closed" slot="start"></ion-icon>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      ></ion-input>
-    </ion-item>
-    <ion-button expand="block" type="submit">
-      <ion-icon name="enter" slot="start"></ion-icon>
-      Iniciar sesión
-    </ion-button>
-  </form>
-  <p>
-    ¿No tienes una cuenta?
-    <a routerLink="/register"
-      ><ion-icon name="person-add"></ion-icon> Regístrate</a
-    >
-  </p>
+  <div class="container">
+    <h1><ion-icon name="log-in"></ion-icon> Iniciar sesión</h1>
+    <form (ngSubmit)="login()">
+      <ion-item>
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-label color="primary" position="floating"
+          >Correo electrónico</ion-label
+        >
+        <ion-input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="lock-closed" slot="start"></ion-icon>
+        <ion-label color="primary" position="floating">Contraseña</ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit">
+        <ion-icon name="enter" slot="start"></ion-icon>
+        Iniciar sesión
+      </ion-button>
+    </form>
+    <p>
+      ¿No tienes una cuenta?
+      <a routerLink="/register"
+        ><ion-icon name="person-add"></ion-icon> Regístrate</a
+      >
+    </p>
+  </div>
 </ion-content>

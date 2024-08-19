@@ -85,3 +85,15 @@ a {
   color: var(--ion-color-primary);
   text-decoration: none;
 }
+
+ion-img {
+  max-width: 200px;
+}
+
+.image-container,
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

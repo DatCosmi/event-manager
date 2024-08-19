@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { AlertController, NavController } from '@ionic/angular';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,8 +12,10 @@ import { AlertController, NavController } from '@ionic/angular';
 export class ProfileComponent implements OnInit {
   displayName: string = '';
   photoURL: string = '';
+  newPhotoTaken: boolean = false;
 
   constructor(
+    private photoService: PhotoService,
     private authService: AuthService,
     private alertController: AlertController,
     private navController: NavController
@@ -29,22 +32,40 @@ export class ProfileComponent implements OnInit {
 
   async updateProfile() {
     try {
+      if (this.newPhotoTaken) {
+        // Si se tomó una nueva foto, súbela primero
+        const photoDataUrl = this.photoURL;
+        const downloadURL = await this.photoService
+          .uploadPhoto(photoDataUrl)
+          .toPromise();
+        if (downloadURL) {
+          this.photoURL = downloadURL;
+        } else {
+          throw new Error('No se pudo obtener la URL de descarga');
+        }
+      }
+
+      // Actualizar el perfil con el nuevo nombre y/o foto
       await this.authService.updateProfile(this.displayName, this.photoURL);
-      this.showAlert('Éxito', 'Perfil actualizado correctamente');
+      await this.showAlert('Éxito', 'Perfil actualizado correctamente');
       this.navController.navigateRoot('/events');
     } catch (error) {
-      this.showAlert('Error', 'No se pudo actualizar el perfil');
+      console.error('Error updating profile:', error);
+      await this.showAlert('Error', 'No se pudo actualizar el perfil');
     }
   }
 
   async takePicture() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-    });
-
-    this.photoURL = image.dataUrl || '';
+    try {
+      const photoDataUrl = await this.photoService.addPhoto();
+      if (photoDataUrl) {
+        this.photoURL = photoDataUrl;
+        this.newPhotoTaken = true;
+      }
+    } catch (error) {
+      console.error('Error taking photo:', error);
+      await this.showAlert('Error', 'No se pudo tomar la foto');
+    }
   }
 
   async showAlert(header: string, message: string) {
